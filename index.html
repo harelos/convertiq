@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvertIQ — SaaS CRO Analyzer for Chrome</title>
+  <meta name="description" content="One-click CRO audit for SaaS landing pages. Get a conversion score and ranked fixes in 10 seconds. Free Chrome extension.">
+  <meta property="og:title" content="ConvertIQ — SaaS CRO Analyzer">
+  <meta property="og:description" content="Stop guessing what's killing your signups. Get a CRO score and ranked fixes in 10 seconds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/convertiq-site/">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--indigo);
+      background: var(--indigo-dim);
+      border: 1px solid var(--indigo-border);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--indigo);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 19px);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta-note {
+      font-size: 12px;
+      color: var(--muted2);
+      font-family: var(--font-mono);
+    }
+
+    /* ── Score mockup ───────────────────────────────────────── */
+    .mockup-wrap {
+      max-width: 420px;
+      margin: 0 auto 80px;
+      position: relative;
+    }
+
+    .mockup-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle at center, rgba(99,102,241,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ext-mockup {
+      background: #0c0c0c;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.6);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .ext-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .ext-logo { display: flex; align-items: center; gap: 6px; }
+    .ext-logo-mark { color: #6366f1; font-size: 13px; }
+    .ext-logo-text { font-size: 12px; font-weight: 600; color: #f0f0f0; }
+    .ext-gear { color: #555; font-size: 13px; }
+
+    .ext-score-card {
+      padding: 16px 14px 12px;
+      border-bottom: 1px solid #1f1f1f;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .ext-score-left {
+      border-left: 3px solid #f59e0b;
+      padding-left: 10px;
+    }
+
+    .ext-score-num {
+      font-size: 42px;
+      font-weight: 700;
+      color: #f59e0b;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .ext-score-label { font-size: 10px; color: #555; margin-top: 2px; }
+
+    .ext-score-right { flex: 1; padding-top: 4px; }
+
+    .ext-grade {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(245,158,11,0.15);
+      color: #f59e0b;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+    }
+
+    .ext-verdict { font-size: 11px; color: #666; line-height: 1.5; }
+
+    .ext-section { padding: 12px 14px; border-bottom: 1px solid #1a1a1a; }
+
+    .ext-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .ext-issue { margin-bottom: 10px; }
+    .ext-issue:last-child { margin-bottom: 0; }
+
+    .ext-issue-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .ext-rank { font-size: 9px; font-weight: 700; color: #444; }
+
+    .ext-badge {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .ext-badge-high { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .ext-badge-med { background: rgba(245,158,11,0.15); color: #f59e0b; }
+
+    .ext-issue-title { font-size: 11px; font-weight: 600; color: #e0e0e0; }
+    .ext-issue-fix { font-size: 10px; color: #22c55e; line-height: 1.5; margin-top: 2px; }
+    .ext-issue-fix::before { content: "→ "; }
+
+    .ext-upgrade {
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    .ext-upgrade-title { font-size: 12px; font-weight: 700; color: #f0f0f0; margin-bottom: 3px; }
+    .ext-upgrade-sub { font-size: 10px; color: #555; margin-bottom: 10px; line-height: 1.5; }
+
+    .ext-upgrade-btn {
+      display: block;
+      width: 100%;
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 8px;
+    }
+
+    .ext-locked-row {
+      display: flex;
+      gap: 5px;
+    }
+
+    .ext-locked-item {
+      flex: 1;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 4px;
+      padding: 3px 4px;
+      font-size: 9px;
+      color: #333;
+      text-align: center;
+    }
+
+    /* ── Features ─────────────────────────────────────────────── */
+    .features {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--indigo);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      padding: 28px;
+      transition: background 0.15s;
+    }
+
+    .feature-card:hover { background: var(--bg3); }
+
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Pricing ──────────────────────────────────────────────── */
+    .pricing {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    .pricing-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--indigo-border);
+      background: rgba(99,102,241,0.04);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--indigo);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .pricing-plan { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
+    .pricing-price { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+    .pricing-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+    .pricing-desc { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+
+    .pricing-features { list-style: none; margin-bottom: 24px; }
+    .pricing-features li {
+      font-size: 14px;
+      color: #b0b0b0;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-size: 12px; font-weight: 700; flex-shrink: 0; }
+
+    .pricing-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 11px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      border: none;
+    }
+
+    .pricing-cta-primary { background: var(--indigo); color: #fff; }
+    .pricing-cta-primary:hover { opacity: 0.88; }
+    .pricing-cta-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border2); }
+    .pricing-cta-ghost:hover { color: var(--text); border-color: var(--muted2); }
+
+    /* ── Privacy strip ────────────────────────────────────────── */
+    .privacy-strip {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .privacy-strip h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .privacy-strip p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+
+    .privacy-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .privacy-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .privacy-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">ConvertIQ</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="privacy.html" class="nav-link">Privacy</a>
+      <a href="https://chrome.google.com/webstore" class="nav-cta" target="_blank" rel="noopener">Add to Chrome</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-eyebrow">Free Chrome Extension — SaaS Landing Pages</div>
+
+    <h1 class="fade-up">Stop guessing what's<br><em>killing your signups</em></h1>
+
+    <p class="hero-sub fade-up delay-1">
+      One click. 10 seconds. A CRO score for your landing page with ranked issues, specific fixes, and exact copy rewrites — not generic advice.
+    </p>
+
+    <div class="hero-cta-row fade-up delay-2">
+      <a href="https://chrome.google.com/webstore" class="btn btn-primary" target="_blank" rel="noopener">
+        Add to Chrome — It's Free
+      </a>
+      <a href="#features" class="btn btn-ghost">See how it works</a>
+    </div>
+
+    <p class="hero-cta-note fade-up delay-3">5 free audits/day · No account required · Your data stays in your browser</p>
+
+    <!-- Extension mockup -->
+    <div class="mockup-wrap fade-up delay-4">
+      <div class="ext-mockup">
+        <div class="ext-header">
+          <div class="ext-logo">
+            <span class="ext-logo-mark">◆</span>
+            <span class="ext-logo-text">ConvertIQ</span>
+          </div>
+          <span class="ext-gear">⚙</span>
+        </div>
+
+        <div class="ext-score-card">
+          <div class="ext-score-left">
+            <div class="ext-score-num">61</div>
+            <div class="ext-score-label">CRO Score</div>
+          </div>
+          <div class="ext-score-right">
+            <div class="ext-grade">GRADE: C</div>
+            <div class="ext-verdict">Your hero CTA is buried below the fold and asks for nothing specific.</div>
+          </div>
+        </div>
+
+        <div class="ext-section">
+          <div class="ext-section-label">Here's what's costing you conversions</div>
+
+          <div class="ext-issue">
+            <div class="ext-issue-header">
+              <span class="ext-rank">#1</span>
+              <span class="ext-badge ext-badge-high">HIGH</span>
+              <span class="ext-issue-title">CTA asks for nothing</span>
+            </div>
+            <div class="ext-issue-fix">Change "Get Started" to "Start Your Free 14-Day Trial"</div>
+          </div>
+
+          <div class="ext-issue">
+            <div class="ext-issue-header">
+              <span class="ext-rank">#2</span>
+              <span class="ext-badge ext-badge-high">HIGH</span>
+              <span class="ext-issue-title">Headline has no outcome</span>
+            </div>
+            <div class="ext-issue-fix">State who gets what result, not just what the product does</div>
+          </div>
+
+          <div class="ext-issue">
+            <div class="ext-issue-header">
+              <span class="ext-rank">#3</span>
+              <span class="ext-badge ext-badge-med">MED</span>
+              <span class="ext-issue-title">Zero trust signals above fold</span>
+            </div>
+            <div class="ext-issue-fix">Add "No credit card required" next to the CTA</div>
+          </div>
+        </div>
+
+        <div class="ext-upgrade">
+          <div class="ext-upgrade-title">Unlock full audit — $19/mo</div>
+          <div class="ext-upgrade-sub">Headline rewrites, CTA fixes, A/B test ideas. Everything a growth consultant would charge $500 for.</div>
+          <button class="ext-upgrade-btn">Upgrade to Pro →</button>
+          <div class="ext-locked-row">
+            <div class="ext-locked-item">🔒 Full Breakdown</div>
+            <div class="ext-locked-item">🔒 Headline Rewrite</div>
+            <div class="ext-locked-item">🔒 CTA Rewrite</div>
+            <div class="ext-locked-item">🔒 A/B Tests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ───────────────────────────────────────────── -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-eyebrow">How it works</div>
+      <h2 class="section-title">A senior growth advisor<br>in your browser</h2>
+      <p class="section-sub">Built for SaaS founders and growth marketers who think in CVR, CAC, and MRR — not "bounce rate."</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">10-second audit</div>
+          <p class="feature-desc">Click the icon on any SaaS landing page. ConvertIQ reads the page, calls Claude AI, and returns a ranked audit. No forms, no waiting.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-title">Specific, not generic</div>
+          <p class="feature-desc">You don't need to hear "add social proof" again. ConvertIQ quotes your actual headline, your actual CTA, and tells you exactly what to rewrite.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Scored across 5 dimensions</div>
+          <p class="feature-desc">Value proposition, CTA strategy, social proof, trust & friction, messaging clarity — each scored 0–100 with a single issue and a single fix.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✍️</div>
+          <div class="feature-title">Copy rewrites included</div>
+          <p class="feature-desc">Get your headline and primary CTA rewritten, before and after, in language your ICP actually responds to. Pro feature.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <div class="feature-title">A/B test hypotheses</div>
+          <p class="feature-desc">Two prioritized test ideas with proper if/then/because hypotheses. Know what to test and why before you build anything. Pro feature.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">Stays in your browser</div>
+          <p class="feature-desc">Your API key and audit results are stored only in Chrome's local storage. ConvertIQ has no backend, no accounts, no data collection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ─────────────────────────────────────────────── -->
+  <section class="pricing" id="pricing">
+    <div class="container" style="text-align:center; margin-bottom:0;">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title">Start free. Upgrade when it clicks.</h2>
+      <p class="section-sub" style="margin: 0 auto 48px;">5 free audits a day is enough to feel the value. Pro is for when you're running audits on every page.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-plan">Free</div>
+        <div class="pricing-price">$0</div>
+        <p class="pricing-desc">5 audits per day. Enough to audit your own pages and your top competitors.</p>
+        <ul class="pricing-features">
+          <li>Overall CRO score (0–100)</li>
+          <li>Letter grade + verdict</li>
+          <li>Top 3 ranked issues + fixes</li>
+          <li>5 audits per day</li>
+          <li>24-hour result cache</li>
+          <li>Tweet / share your score</li>
+        </ul>
+        <a href="https://chrome.google.com/webstore" class="pricing-cta pricing-cta-ghost" target="_blank" rel="noopener">Add to Chrome →</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">MOST POPULAR</div>
+        <div class="pricing-plan">Pro</div>
+        <div class="pricing-price">$19 <span>/ month</span></div>
+        <p class="pricing-desc">Unlimited audits with the full breakdown. Everything a growth consultant would charge $500/hr for.</p>
+        <ul class="pricing-features">
+          <li>Everything in Free</li>
+          <li>Unlimited audits</li>
+          <li>Full 5-category breakdown</li>
+          <li>Quick wins (under 30 min)</li>
+          <li>Headline rewrite (before/after)</li>
+          <li>CTA rewrite (before/after)</li>
+          <li>2 A/B test hypotheses</li>
+        </ul>
+        <a href="https://convertiq.app/upgrade?ref=site" class="pricing-cta pricing-cta-primary" target="_blank" rel="noopener">Upgrade to Pro →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Privacy strip ───────────────────────────────────────── -->
+  <section class="privacy-strip">
+    <h2>Built with privacy first</h2>
+    <p>ConvertIQ has no backend server, no accounts, and no analytics. Your API key and audit data never leave your browser except to Anthropic's API when you click Analyze.</p>
+    <div class="privacy-badges">
+      <div class="privacy-badge"><span class="dot"></span> No account required</div>
+      <div class="privacy-badge"><span class="dot"></span> No data collection</div>
+      <div class="privacy-badge"><span class="dot"></span> No tracking</div>
+      <div class="privacy-badge"><span class="dot"></span> Manifest V3</div>
+      <div class="privacy-badge"><span class="dot"></span> Open source</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <span class="footer-logo-mark">◆</span>
+      ConvertIQ
+    </a>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      <a href="terms.html" class="footer-link">Terms of Service</a>
+      <a href="support.html" class="footer-link">Support</a>
+      <a href="https://chrome.google.com/webstore" class="footer-link" target="_blank" rel="noopener">Chrome Store</a>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 ConvertIQ. All rights reserved. ConvertIQ is an independent product and is not affiliated with Anthropic or Google.</p>
+  </div>
+</footer>
+
+</body>
+</html>

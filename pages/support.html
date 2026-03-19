@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — ConvertIQ</title>
+  <meta name="description" content="ConvertIQ support center. Setup guides, FAQs, and contact options.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .support-hero {
+      padding: 72px 24px 56px;
+      text-align: center;
+    }
+
+    .support-hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .support-hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Contact cards row */
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 720px;
+      margin: 48px auto 0;
+    }
+
+    .contact-option {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .contact-option:hover {
+      border-color: var(--indigo-border);
+      background: rgba(99,102,241,0.04);
+    }
+
+    .contact-option-icon { font-size: 28px; margin-bottom: 10px; }
+    .contact-option-label { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .contact-option-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* FAQ */
+    .faq-section {
+      padding: 72px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .faq-header h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .faq-header p {
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .faq-grid {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 18px 20px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.15s;
+    }
+
+    .faq-question:hover { background: var(--bg3); }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+
+    .faq-answer a {
+      color: var(--indigo);
+      text-decoration: none;
+      border-bottom: 1px solid var(--indigo-border);
+    }
+
+    .faq-answer a:hover { border-color: var(--indigo); }
+
+    .faq-answer code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: #a5b4fc;
+    }
+
+    .faq-answer ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    .faq-answer li { margin-bottom: 5px; }
+
+    /* Install guide */
+    .install-section {
+      padding: 0 24px 72px;
+    }
+
+    .install-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .install-card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .install-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .install-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--indigo-dim);
+      border: 1px solid var(--indigo-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--indigo);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-content h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step-content a {
+      color: var(--indigo);
+      text-decoration: none;
+      border-bottom: 1px solid var(--indigo-border);
+    }
+
+    .step-content a:hover { border-color: var(--indigo); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">ConvertIQ</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features" class="nav-link">Features</a>
+      <a href="index.html#pricing" class="nav-link">Pricing</a>
+      <a href="support.html" class="nav-link active">Support</a>
+      <a href="privacy.html" class="nav-link">Privacy</a>
+      <a href="https://chrome.google.com/webstore" class="nav-cta" target="_blank" rel="noopener">Add to Chrome</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <section class="support-hero">
+    <div class="prose-tag" style="display:inline-block; margin-bottom:16px;">Support Center</div>
+    <h1 class="fade-up">How can we help?</h1>
+    <p class="fade-up delay-1">Setup guides, FAQs, and direct contact. Most issues are solved in under 2 minutes.</p>
+
+    <div class="contact-row fade-up delay-2">
+      <a href="mailto:support@convertiq.app" class="contact-option">
+        <div class="contact-option-icon">✉️</div>
+        <div class="contact-option-label">Email support</div>
+        <div class="contact-option-sub">support@convertiq.app<br>Reply within 24 hours</div>
+      </a>
+      <a href="https://github.com/yourusername/convertiq/issues" class="contact-option" target="_blank" rel="noopener">
+        <div class="contact-option-icon">🐛</div>
+        <div class="contact-option-label">Report a bug</div>
+        <div class="contact-option-sub">Open an issue on GitHub<br>For technical problems</div>
+      </a>
+      <a href="mailto:billing@convertiq.app" class="contact-option">
+        <div class="contact-option-icon">💳</div>
+        <div class="contact-option-label">Billing</div>
+        <div class="contact-option-sub">billing@convertiq.app<br>Refunds & subscription help</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Install guide ──────────────────────────────────────── -->
+  <section class="install-section">
+    <div class="install-card fade-up">
+      <h2>⚡ Get started in 60 seconds</h2>
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Install the extension</h3>
+            <p>Click <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener">Add to Chrome</a> on the Chrome Web Store. The extension installs in seconds — no account required.</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Get your Anthropic API key</h3>
+            <p>Go to <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> → API Keys → Create Key. The key starts with <code>sk-ant-api03-</code>. Anthropic offers free credits for new accounts.</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Connect your key</h3>
+            <p>The ConvertIQ settings page opens automatically on first install. Paste your API key → Save Key → Test Connection. ConvertIQ confirms the key works before you use it.</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Run your first audit</h3>
+            <p>Navigate to any SaaS landing page. Click the ◆ ConvertIQ icon in your Chrome toolbar. Click "Analyze This Page." Your CRO score appears in ~10 seconds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────── -->
+  <section class="faq-section">
+    <div class="faq-header">
+      <div class="section-eyebrow" style="font-family:var(--font-mono);font-size:11px;color:var(--indigo);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">FAQ</div>
+      <h2>Frequently asked questions</h2>
+      <p>Everything you need to know about ConvertIQ.</p>
+    </div>
+
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is ConvertIQ really free?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Yes. The free plan gives you 5 CRO audits per day with no credit card required. You only need to provide your own Anthropic API key, which Anthropic offers with free credits for new accounts. The Pro plan ($19/mo) unlocks unlimited audits, copy rewrites, and A/B test hypotheses.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Why do I need an Anthropic API key?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          ConvertIQ uses Claude AI (by Anthropic) to analyze pages and generate CRO recommendations. Rather than routing your page data through our servers, ConvertIQ calls Anthropic's API directly from your browser — which means your data stays private and you only pay for what you use. Get a free API key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How much does the Anthropic API cost?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Each ConvertIQ audit uses Claude Sonnet and costs approximately $0.01–$0.03 per audit depending on page length. At 5 audits/day, that's under $5/month in API costs — and Anthropic gives new accounts free credits. Pro users running 20+ audits/day might spend $10–$20/month in API costs.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is my data private? What does ConvertIQ send to Anthropic?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          When you click Analyze, ConvertIQ sends the following to Anthropic's API:
+          <ul>
+            <li>The page headline, subheadings, and button text</li>
+            <li>A 1,000-character text sample from the page body</li>
+            <li>Structural signals (does it have testimonials, pricing, FAQs, etc.)</li>
+          </ul>
+          ConvertIQ has no backend — this data goes directly from your browser to Anthropic. We never see it. See our <a href="privacy.html">Privacy Policy</a> for full details.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          The extension says "Analysis failed" — what do I do?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          This usually means one of three things:
+          <ul>
+            <li><strong>Invalid API key</strong> — go to Settings (⚙ icon) and click "Test Connection." If it fails, regenerate your key at console.anthropic.com.</li>
+            <li><strong>Anthropic API outage</strong> — check <a href="https://status.anthropic.com" target="_blank" rel="noopener">status.anthropic.com</a> and try again in a few minutes.</li>
+            <li><strong>JavaScript-heavy page</strong> — some pages are fully rendered by JS and the extension can't extract enough text. This is rare on standard SaaS pages.</li>
+          </ul>
+          If the problem persists, email <a href="mailto:support@convertiq.app">support@convertiq.app</a>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Why is my score cached? Can I force a re-analysis?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          ConvertIQ caches results for 24 hours per URL to save API costs. If you've made changes to your page and want a fresh audit, click "Analyze Again" at the bottom of the results panel — this clears the cache and runs a new analysis.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I use ConvertIQ on competitor pages?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Yes. ConvertIQ works on any publicly accessible web page. Analyzing competitor pages is one of the most common use cases — see where your competition scores and identify gaps. ConvertIQ only reads publicly available page content, the same as any visitor would see.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Does ConvertIQ work on any website or just SaaS pages?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          ConvertIQ works on any webpage but is tuned to analyze SaaS landing pages, pricing pages, and trial signup flows. The AI is specifically prompted to evaluate pages for SaaS conversion metrics (trial signups, demo requests, paid conversions). Results on e-commerce or blog pages may be less tailored.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I cancel my Pro subscription?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Email <a href="mailto:billing@convertiq.app">billing@convertiq.app</a> with "Cancel subscription" in the subject line and we'll cancel immediately. You keep Pro access until the end of your current billing period. If you're within 7 days of your initial purchase and unsatisfied, we'll refund you in full.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I remove ConvertIQ and delete my data?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Right-click the ConvertIQ icon in Chrome → "Remove from Chrome." This uninstalls the extension and removes all locally stored data (API key, cached results, usage counts) from your browser. There is no account to delete because ConvertIQ has no server-side account system.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          I found a bug. How do I report it?
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          Open an issue on our <a href="https://github.com/yourusername/convertiq/issues" target="_blank" rel="noopener">GitHub repository</a> or email <a href="mailto:support@convertiq.app">support@convertiq.app</a>. Please include: Chrome version, the URL you were analyzing (if not sensitive), and what happened vs. what you expected.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <span class="footer-logo-mark">◆</span>
+      ConvertIQ
+    </a>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      <a href="terms.html" class="footer-link">Terms of Service</a>
+      <a href="support.html" class="footer-link">Support</a>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 ConvertIQ. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>
