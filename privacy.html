@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — ConvertIQ</title>
-  <meta name="description" content="ConvertIQ Privacy Policy. We collect no personal data. Your API key never leaves your browser.">
+  <meta name="description" content="ConvertIQ Privacy Policy. We collect no personal data.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,13 +33,13 @@
       <div class="prose-header fade-up">
         <div class="prose-tag">Legal</div>
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: March 19, 2025 · Effective immediately</p>
+        <p class="updated">Last updated: March 23, 2026 · Effective immediately</p>
       </div>
 
       <div class="prose-body fade-up delay-1">
 
         <div class="highlight-box">
-          <p><strong>The short version:</strong> ConvertIQ collects no personal data, has no backend server, and stores nothing outside your own browser. Your Anthropic API key is stored locally in Chrome and sent only to <code>api.anthropic.com</code> when you click Analyze. That's it.</p>
+          <p><strong>The short version:</strong> ConvertIQ collects no personal data, has no backend server belonging to us, and stores nothing outside your own browser. The page content you analyze is securely sent directly to <code>api.groq.com</code> for AI processing. That's it.</p>
         </div>
 
         <h2>1. Who We Are</h2>
@@ -47,73 +47,67 @@
         <p>If you have questions, contact us at: <a href="mailto:privacy@convertiq.app">privacy@convertiq.app</a></p>
 
         <h2>2. Information We Do NOT Collect</h2>
-        <p>ConvertIQ is designed from the ground up to collect no personal information. Specifically, we do not collect:</p>
+        <p>ConvertIQ is designed from the ground up to collect no personal information. Specifically, we do not collect, store, or transmit to our own servers:</p>
         <ul>
           <li>Your name, email address, or any account information</li>
-          <li>Your browsing history or the URLs of pages you visit</li>
-          <li>Your Anthropic API key (it is stored only in your browser's local storage)</li>
-          <li>The content of pages you analyze</li>
+          <li>Your overall browsing history or the URLs of pages you visit (except the specific page you click "Analyze" on)</li>
           <li>Your IP address or location</li>
-          <li>Usage analytics or behavioral data</li>
+          <li>Usage analytics, telemetrics, or behavioral data</li>
           <li>Crash reports or diagnostic data</li>
-          <li>Payment information (handled entirely by our payment processor)</li>
+          <li>Payment information (transactions are handled entirely by an external payment processor, if applicable)</li>
         </ul>
-        <p>ConvertIQ has <strong>no backend server</strong> that receives or stores your data. There is no database. There are no user accounts.</p>
+        <p>ConvertIQ has <strong>no backend database</strong> that receives or stores your user data. There are no user accounts created by our extension.</p>
 
         <h2>3. What Stays in Your Browser</h2>
-        <p>The following data is stored exclusively in your browser using Chrome's <code>chrome.storage.local</code> API. It never leaves your device except as described in Section 4:</p>
+        <p>The following data is stored exclusively in your browser using Chrome's <code>chrome.storage.local</code> API. It never leaves your device:</p>
         <ul>
-          <li><strong>Anthropic API key</strong> — stored encrypted in Chrome local storage, used only to call Anthropic's API on your behalf</li>
-          <li><strong>Audit results cache</strong> — CRO analysis results are cached for 24 hours per URL to avoid redundant API calls</li>
-          <li><strong>Daily usage count</strong> — a counter that resets each day, used to enforce the free tier limit (5 audits/day)</li>
-          <li><strong>User plan status</strong> — "free" or "pro," stored locally after plan verification</li>
+          <li><strong>Audit results cache</strong> — CRO analysis results are cached locally for 24 hours per URL to avoid redundant API calls and save compute.</li>
+          <li><strong>Daily usage count</strong> — A localized counter that resets each day, used simply to enforce the free tier limit (5 audits/day).</li>
+          <li><strong>User plan status</strong> — "free" or "pro," stored locally in your browser.</li>
         </ul>
         <p>You can clear all locally stored data at any time by removing the extension from Chrome or by clearing extension data in Chrome's settings (<code>chrome://settings/content/all</code>).</p>
 
         <h2>4. Data Sent to Third-Party Services</h2>
-        <p>When you click "Analyze This Page," ConvertIQ sends the following data to Anthropic's API on your behalf:</p>
+        <p>When you explicitly click "Analyze This Page" in the extension popup, ConvertIQ temporarily extracts specific visible text from the page you are viewing and sends it to Groq's API on your behalf to generate the CRO report. The specific data sent includes:</p>
         <ul>
-          <li>Extracted page content: headline, subheadings, button text, meta description, and a text sample (up to 1,000 characters)</li>
-          <li>Structural signals: whether the page has testimonials, pricing sections, FAQ, trust badges, etc.</li>
-          <li>Your API key (in the request header, to authenticate the request)</li>
+          <li>Extracted page text: headlines (H1, H2s), subheadings, button text, meta descriptions, and a text sample (up to 1,200 characters).</li>
+          <li>Structural signals: whether the page has testimonials, pricing sections, FAQ, or trust badges.</li>
+          <li>The current active tab's URL.</li>
         </ul>
-        <p>This data is transmitted directly from your browser to <code>api.anthropic.com</code>. ConvertIQ never sees, stores, or logs this data. Anthropic's handling of data sent to their API is governed by <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>.</p>
+        <p>This data is transmitted directly from your browser to <code>api.groq.com</code> (the AI provider). <strong>ConvertIQ itself never sees, stores, or logs this data.</strong> Groq's handling of data sent to their API is governed by <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's Privacy Policy</a>.</p>
 
         <div class="warning-box">
-          <p><strong>Important:</strong> Do not use ConvertIQ to analyze pages containing sensitive personal information (PII, health records, financial data, etc.). The page content extraction and AI analysis is designed for public-facing marketing pages only.</p>
+          <p><strong>Important:</strong> Do not use ConvertIQ to analyze pages containing sensitive personal information (PII, health records, financial data, etc.) or post-login user dashboards. The page content extraction and AI analysis is designed strictly for public-facing marketing and SaaS landing pages.</p>
         </div>
 
-        <h2>5. Chrome Extension Permissions</h2>
-        <p>ConvertIQ requests only the minimum permissions required to function:</p>
+        <h2>5. Chrome Extension Permissions Explained</h2>
+        <p>Google Chrome Web Store requires us to list exactly what permissions we request and why. ConvertIQ requests only the minimum permissions required to function. Here is exactly what we use them for:</p>
         <ul>
-          <li><strong><code>activeTab</code></strong> — allows the extension to read the URL and inject a content script into the currently active tab when you click Analyze. The extension cannot read other tabs.</li>
-          <li><strong><code>storage</code></strong> — allows the extension to store your API key, usage count, and cached results in Chrome's local storage.</li>
-          <li><strong><code>scripting</code></strong> — allows the extension to inject a content extraction script into the active tab when you click Analyze. This script extracts text content and returns it to the extension. It does not modify the page.</li>
+          <li><strong><code>activeTab</code></strong> — This allows the extension to read the URL and inject a temporary content script into ONLY the currently active tab, and ONLY when you explicitly click the ConvertIQ action icon. The extension cannot passively read other tabs or monitor your browsing.</li>
+          <li><strong><code>storage</code></strong> — This allows the extension to store your daily trial count, Pro plan status, and cached audit results directly to your local Chrome storage space.</li>
+          <li><strong><code>scripting</code></strong> — Used alongside the <code>activeTab</code> permission, this allows the extension to inject the text-extraction script into the active tab to grab headlines and CTAs. It does not permanently modify the webpage.</li>
+        <li><strong>Host permission (<code>https://api.groq.com/*</code>)</strong> — Required to securely send the extracted text to Groq's Large Language Model (Llama 3.3) to provide your CRO Audit.</li>
         </ul>
-        <p>ConvertIQ does not request <code>host_permissions</code>, <code>&lt;all_urls&gt;</code>, or broad browsing history access. Content scripts are injected only on explicit user action (clicking "Analyze This Page"), not automatically on page load.</p>
 
         <h2>6. Website Analytics</h2>
-        <p>This website (convertiq.app) does not use any analytics, tracking pixels, or cookies beyond what is technically required to serve the pages. We do not use Google Analytics, Facebook Pixel, or any third-party tracking tools.</p>
+        <p>This website (convertiq.app) does not use any analytics, tracking pixels, or cookies beyond what is technically required to serve the pages. We do not use Google Analytics or Facebook Pixel.</p>
         <p>GitHub Pages (our hosting provider) may collect basic server logs (IP addresses, request timestamps) as part of standard web server operation. This is governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Policy</a>.</p>
 
         <h2>7. Payments and Pro Plan</h2>
-        <p>If you upgrade to ConvertIQ Pro, payment is processed by a third-party payment processor (Stripe or LemonSqueezy). We do not store or handle your payment card information. All payment data is governed by the payment processor's privacy policy.</p>
-        <p>Upon successful payment, your plan status ("pro") is stored locally in your browser. We may store your email address for the purpose of managing your subscription and sending transaction receipts.</p>
+        <p>If you upgrade to ConvertIQ Pro, payment is processed by a third-party payment processor. We do not store or handle your payment card information. All payment data is governed by the payment processor's privacy policy. Upon successful payment, a signal updates your local browser storage to "pro".</p>
 
         <h2>8. Children's Privacy</h2>
         <p>ConvertIQ is not directed at children under the age of 13. We do not knowingly collect any personal information from children. If you believe a child has provided personal information, please contact us at <a href="mailto:privacy@convertiq.app">privacy@convertiq.app</a>.</p>
 
         <h2>9. Your Rights</h2>
-        <p>Because we collect no personal data, there is generally nothing to access, correct, or delete. However:</p>
+        <p>Because we collect no personal data onto servers we own, there is generally no data for us to access, correct, or delete on your behalf. However:</p>
         <ul>
-          <li>You can delete all locally stored data by removing the extension</li>
-          <li>If you have a Pro subscription, you can request deletion of your email from our subscription records by contacting <a href="mailto:privacy@convertiq.app">privacy@convertiq.app</a></li>
-          <li>California residents: ConvertIQ does not sell personal information and is therefore not subject to CCPA opt-out requirements</li>
-          <li>EU/UK residents: our processing of any personal data (subscription email only) is based on contract performance (GDPR Article 6(1)(b))</li>
+          <li>You can delete all locally stored data immediately by uninstalling the ConvertIQ extension.</li>
+          <li>California residents: ConvertIQ does not sell personal information and is therefore not subject to CCPA opt-out requirements.</li>
         </ul>
 
         <h2>10. Data Security</h2>
-        <p>ConvertIQ is architected so that sensitive data (your API key) never passes through any server we control. The only external transmission is directly from your browser to Anthropic's API over encrypted HTTPS. Chrome's <code>storage.local</code> API is sandboxed to the extension and is not accessible by websites.</p>
+        <p>ConvertIQ is architected so that your web page content never passes through any server we control. The only external transmission is directly from your browser to Groq's API over encrypted HTTPS. Chrome's <code>storage.local</code> API is sandboxed to the extension and is not accessible by other websites.</p>
 
         <h2>11. Changes to This Policy</h2>
         <p>We may update this Privacy Policy from time to time. Material changes will be noted with an updated "Last updated" date. Continued use of the extension after changes constitutes acceptance. We will not reduce your privacy protections without explicit notice.</p>
@@ -148,9 +142,10 @@
     </div>
   </div>
   <div class="footer-inner">
-    <p class="footer-copy">© 2025 ConvertIQ. All rights reserved.</p>
+    <p class="footer-copy">© 2026 ConvertIQ. All rights reserved.</p>
   </div>
 </footer>
 
 </body>
 </html>
+
