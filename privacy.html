@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — ConvertIQ</title>
-  <meta name="description" content="ConvertIQ Privacy Policy. We collect no personal data.">
+  <meta name="description" content="ConvertIQ Privacy Policy. We collect no personal data. Your API key never leaves your browser.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,6 @@
       <a href="index.html#features" class="nav-link">Features</a>
       <a href="index.html#pricing" class="nav-link">Pricing</a>
       <a href="support.html" class="nav-link">Support</a>
-      <a href="upgrade.html" class="nav-link">Go Pro</a>
       <a href="privacy.html" class="nav-link active">Privacy</a>
       <a href="https://chrome.google.com/webstore" class="nav-cta" target="_blank" rel="noopener">Add to Chrome</a>
     </div>
@@ -33,86 +32,53 @@
       <div class="prose-header fade-up">
         <div class="prose-tag">Legal</div>
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: March 23, 2026 · Effective immediately</p>
+        <p class="updated">Last updated: March 19, 2025 · Effective immediately</p>
       </div>
 
       <div class="prose-body fade-up delay-1">
 
         <div class="highlight-box">
-          <p><strong>The short version:</strong> ConvertIQ collects no personal data, has no backend server belonging to us, and stores nothing outside your own browser. The page content you analyze is securely sent directly to <code>api.groq.com</code> for AI processing. That's it.</p>
+          <p><strong>The short version:</strong> ConvertIQ collects no personal data, has no backend server, and stores nothing outside your own browser. The extension analyzes pages exclusively via OpenAI's API. That's it.</p>
         </div>
 
-        <h2>1. Who We Are</h2>
-        <p>ConvertIQ ("we," "us," or "our") is a Chrome browser extension that analyzes SaaS landing pages for conversion rate optimization (CRO). This Privacy Policy describes how ConvertIQ handles information when you use the extension and this website.</p>
-        <p>If you have questions, contact us at: <a href="mailto:privacy@convertiq.app">privacy@convertiq.app</a></p>
-
-        <h2>2. Information We Do NOT Collect</h2>
-        <p>ConvertIQ is designed from the ground up to collect no personal information. Specifically, we do not collect, store, or transmit to our own servers:</p>
+        <h2>1. Information Collection</h2>
+        <p>ConvertIQ ("we," "us," or "our") is a Chrome browser extension that analyzes SaaS landing pages for conversion rate optimization (CRO).</p>
+        <p>ConvertIQ is designed from the ground up to collect no personal information. Specifically, we do not collect:</p>
         <ul>
           <li>Your name, email address, or any account information</li>
-          <li>Your overall browsing history or the URLs of pages you visit (except the specific page you click "Analyze" on)</li>
+          <li>Your browsing history or the URLs of pages you visit</li>
           <li>Your IP address or location</li>
-          <li>Usage analytics, telemetrics, or behavioral data</li>
-          <li>Crash reports or diagnostic data</li>
-          <li>Payment information (transactions are handled entirely by an external payment processor, if applicable)</li>
+          <li>Usage analytics or behavioral data</li>
         </ul>
-        <p>ConvertIQ has <strong>no backend database</strong> that receives or stores your user data. There are no user accounts created by our extension.</p>
+        <p>ConvertIQ has <strong>no backend server</strong> that receives or stores your data.</p>
 
-        <h2>3. What Stays in Your Browser</h2>
-        <p>The following data is stored exclusively in your browser using Chrome's <code>chrome.storage.local</code> API. It never leaves your device:</p>
+        <h2>2. Information Handling</h2>
+        <p>When you explicitly click "Analyze This Page," ConvertIQ extracts the following data from the current active tab:</p>
         <ul>
-          <li><strong>Audit results cache</strong> — CRO analysis results are cached locally for 24 hours per URL to avoid redundant API calls and save compute.</li>
-          <li><strong>Daily usage count</strong> — A localized counter that resets each day, used simply to enforce the free tier limit (5 audits/day).</li>
-          <li><strong>User plan status</strong> — "free" or "pro," stored locally in your browser.</li>
+          <li>Extracted page content: headline, subheadings, button text, meta description, and a text sample</li>
+          <li>Structural signals: whether the page has testimonials, pricing sections, FAQ, trust badges, etc.</li>
         </ul>
-        <p>You can clear all locally stored data at any time by removing the extension from Chrome or by clearing extension data in Chrome's settings (<code>chrome://settings/content/all</code>).</p>
+        <p>ConvertIQ requests only the minimum permissions required to function, such as <code>activeTab</code> and <code>storage</code>. It does not run passively or scan pages automatically. Content scripts are only injected upon your explicit click.</p>
 
-        <h2>4. Data Sent to Third-Party Services</h2>
-        <p>When you explicitly click "Analyze This Page" in the extension popup, ConvertIQ temporarily extracts specific visible text from the page you are viewing and sends it to Groq's API on your behalf to generate the CRO report. The specific data sent includes:</p>
+        <h2>3. Information Storage</h2>
+        <p>All temporary data is stored exclusively in your browser using Chrome's <code>chrome.storage.local</code> API. It never leaves your device (except as described in Section 4):</p>
         <ul>
-          <li>Extracted page text: headlines (H1, H2s), subheadings, button text, meta descriptions, and a text sample (up to 1,200 characters).</li>
-          <li>Structural signals: whether the page has testimonials, pricing sections, FAQ, or trust badges.</li>
-          <li>The current active tab's URL.</li>
+          <li><strong>Audit results cache</strong> — CRO analysis results are cached for 24 hours per URL to avoid redundant API calls</li>
+          <li><strong>Daily usage count</strong> — a counter that resets each day</li>
+          <li><strong>User plan status</strong> — "free" or "pro," stored locally</li>
         </ul>
-        <p>This data is transmitted directly from your browser to <code>api.groq.com</code> (the AI provider). <strong>ConvertIQ itself never sees, stores, or logs this data.</strong> Groq's handling of data sent to their API is governed by <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's Privacy Policy</a>.</p>
+        <p>You can clear all locally stored data at any time by removing the extension from Chrome.</p>
 
-        <div class="warning-box">
-          <p><strong>Important:</strong> Do not use ConvertIQ to analyze pages containing sensitive personal information (PII, health records, financial data, etc.) or post-login user dashboards. The page content extraction and AI analysis is designed strictly for public-facing marketing and SaaS landing pages.</p>
-        </div>
+        <h2>4. Information Sharing</h2>
+        <p>Because we do not have a backend server, we do not collect, sell, or share your data with any advertisers or third-party brokers.</p>
+        <p>The only external transmission occurs when you click "Analyze This Page." The extracted page data is transmitted directly from your browser to <strong>OpenAI's API</strong> (api.openai.com) on your behalf to perform the CRO analysis. ConvertIQ never sees, stores, or logs this data.</p>
+        <p>OpenAI's handling of data sent to their API is governed by OpenAI's Privacy Policy.</p>
 
-        <h2>5. Chrome Extension Permissions Explained</h2>
-        <p>Google Chrome Web Store requires us to list exactly what permissions we request and why. ConvertIQ requests only the minimum permissions required to function. Here is exactly what we use them for:</p>
-        <ul>
-          <li><strong><code>activeTab</code></strong> — This allows the extension to read the URL and inject a temporary content script into ONLY the currently active tab, and ONLY when you explicitly click the ConvertIQ action icon. The extension cannot passively read other tabs or monitor your browsing.</li>
-          <li><strong><code>storage</code></strong> — This allows the extension to store your daily trial count, Pro plan status, and cached audit results directly to your local Chrome storage space.</li>
-          <li><strong><code>scripting</code></strong> — Used alongside the <code>activeTab</code> permission, this allows the extension to inject the text-extraction script into the active tab to grab headlines and CTAs. It does not permanently modify the webpage.</li>
-        <li><strong>Host permission (<code>https://api.groq.com/*</code>)</strong> — Required to securely send the extracted text to Groq's Large Language Model (Llama 3.3) to provide your CRO Audit.</li>
-        </ul>
+        <h2>5. Website Analytics & Payments</h2>
+        <p>This website (convertiq.app) does not use any analytics, tracking pixels, or cookies beyond what is technically required to serve the pages.</p>
+        <p>If you upgrade to ConvertIQ Pro, payment is processed by a third-party payment processor. We do not store or handle your payment card information.</p>
 
-        <h2>6. Website Analytics</h2>
-        <p>This website (convertiq.app) does not use any analytics, tracking pixels, or cookies beyond what is technically required to serve the pages. We do not use Google Analytics or Facebook Pixel.</p>
-        <p>GitHub Pages (our hosting provider) may collect basic server logs (IP addresses, request timestamps) as part of standard web server operation. This is governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Policy</a>.</p>
-
-        <h2>7. Payments and Pro Plan</h2>
-        <p>If you upgrade to ConvertIQ Pro, payment is processed by a third-party payment processor. We do not store or handle your payment card information. All payment data is governed by the payment processor's privacy policy. Upon successful payment, a signal updates your local browser storage to "pro".</p>
-
-        <h2>8. Children's Privacy</h2>
-        <p>ConvertIQ is not directed at children under the age of 13. We do not knowingly collect any personal information from children. If you believe a child has provided personal information, please contact us at <a href="mailto:privacy@convertiq.app">privacy@convertiq.app</a>.</p>
-
-        <h2>9. Your Rights</h2>
-        <p>Because we collect no personal data onto servers we own, there is generally no data for us to access, correct, or delete on your behalf. However:</p>
-        <ul>
-          <li>You can delete all locally stored data immediately by uninstalling the ConvertIQ extension.</li>
-          <li>California residents: ConvertIQ does not sell personal information and is therefore not subject to CCPA opt-out requirements.</li>
-        </ul>
-
-        <h2>10. Data Security</h2>
-        <p>ConvertIQ is architected so that your web page content never passes through any server we control. The only external transmission is directly from your browser to Groq's API over encrypted HTTPS. Chrome's <code>storage.local</code> API is sandboxed to the extension and is not accessible by other websites.</p>
-
-        <h2>11. Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Material changes will be noted with an updated "Last updated" date. Continued use of the extension after changes constitutes acceptance. We will not reduce your privacy protections without explicit notice.</p>
-
-        <h2>12. Contact</h2>
+        <h2>6. Contact</h2>
         <div class="contact-card">
           <div class="contact-card-icon">✉️</div>
           <div>
@@ -138,14 +104,12 @@
       <a href="privacy.html" class="footer-link">Privacy Policy</a>
       <a href="terms.html" class="footer-link">Terms of Service</a>
       <a href="support.html" class="footer-link">Support</a>
-      <a href="upgrade.html" class="footer-link">Go Pro</a>
     </div>
   </div>
   <div class="footer-inner">
-    <p class="footer-copy">© 2026 ConvertIQ. All rights reserved.</p>
+    <p class="footer-copy">© 2025 ConvertIQ. All rights reserved.</p>
   </div>
 </footer>
 
 </body>
 </html>
-
