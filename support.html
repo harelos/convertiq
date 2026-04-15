@@ -288,20 +288,6 @@
         <div class="install-step">
           <div class="step-num">2</div>
           <div class="step-content">
-            <h3>Get your Anthropic API key</h3>
-            <p>Go to <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> → API Keys → Create Key. The key starts with <code>sk-ant-api03-</code>. Anthropic offers free credits for new accounts.</p>
-          </div>
-        </div>
-        <div class="install-step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Connect your key</h3>
-            <p>The ConvertIQ settings page opens automatically on first install. Paste your API key → Save Key → Test Connection. ConvertIQ confirms the key works before you use it.</p>
-          </div>
-        </div>
-        <div class="install-step">
-          <div class="step-num">4</div>
-          <div class="step-content">
             <h3>Run your first audit</h3>
             <p>Navigate to any SaaS landing page. Click the ◆ ConvertIQ icon in your Chrome toolbar. Click "Analyze This Page." Your CRO score appears in ~10 seconds.</p>
           </div>
@@ -326,43 +312,25 @@
           <span class="faq-chevron">▼</span>
         </button>
         <div class="faq-answer">
-          Yes. The free plan gives you 5 CRO audits per day with no credit card required. You only need to provide your own Anthropic API key, which Anthropic offers with free credits for new accounts. The Pro plan ($19/mo) unlocks unlimited audits, copy rewrites, and A/B test hypotheses.
+          Yes. The free plan gives you 5 CRO audits per day with no credit card required. There is no API key needed. The Pro plan ($19/mo) unlocks unlimited audits, copy rewrites, and A/B test hypotheses.
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Why do I need an Anthropic API key?
-          <span class="faq-chevron">▼</span>
-        </button>
-        <div class="faq-answer">
-          ConvertIQ uses Claude AI (by Anthropic) to analyze pages and generate CRO recommendations. Rather than routing your page data through our servers, ConvertIQ calls Anthropic's API directly from your browser — which means your data stays private and you only pay for what you use. Get a free API key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>.
-        </div>
-      </div>
+
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How much does the Anthropic API cost?
+          Is my data private? What does ConvertIQ send to OpenAI?
           <span class="faq-chevron">▼</span>
         </button>
         <div class="faq-answer">
-          Each ConvertIQ audit uses Claude Sonnet and costs approximately $0.01–$0.03 per audit depending on page length. At 5 audits/day, that's under $5/month in API costs — and Anthropic gives new accounts free credits. Pro users running 20+ audits/day might spend $10–$20/month in API costs.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Is my data private? What does ConvertIQ send to Anthropic?
-          <span class="faq-chevron">▼</span>
-        </button>
-        <div class="faq-answer">
-          When you click Analyze, ConvertIQ sends the following to Anthropic's API:
+          When you click Analyze, ConvertIQ sends the following to OpenAI's API:
           <ul>
             <li>The page headline, subheadings, and button text</li>
             <li>A 1,000-character text sample from the page body</li>
             <li>Structural signals (does it have testimonials, pricing, FAQs, etc.)</li>
           </ul>
-          ConvertIQ has no backend — this data goes directly from your browser to Anthropic. We never see it. See our <a href="privacy.html">Privacy Policy</a> for full details.
+          ConvertIQ has no backend — this data goes directly from your browser to OpenAI. We never see it. See our <a href="privacy.html">Privacy Policy</a> for full details.
         </div>
       </div>
 
@@ -374,8 +342,7 @@
         <div class="faq-answer">
           This usually means one of three things:
           <ul>
-            <li><strong>Invalid API key</strong> — go to Settings (⚙ icon) and click "Test Connection." If it fails, regenerate your key at console.anthropic.com.</li>
-            <li><strong>Anthropic API outage</strong> — check <a href="https://status.anthropic.com" target="_blank" rel="noopener">status.anthropic.com</a> and try again in a few minutes.</li>
+            <li><strong>OpenAI API outage</strong> — check <a href="https://status.openai.com" target="_blank" rel="noopener">status.openai.com</a> and try again in a few minutes.</li>
             <li><strong>JavaScript-heavy page</strong> — some pages are fully rendered by JS and the extension can't extract enough text. This is rare on standard SaaS pages.</li>
           </ul>
           If the problem persists, email <a href="mailto:support@convertiq.app">support@convertiq.app</a>.
@@ -428,7 +395,7 @@
           <span class="faq-chevron">▼</span>
         </button>
         <div class="faq-answer">
-          Right-click the ConvertIQ icon in Chrome → "Remove from Chrome." This uninstalls the extension and removes all locally stored data (API key, cached results, usage counts) from your browser. There is no account to delete because ConvertIQ has no server-side account system.
+          Right-click the ConvertIQ icon in Chrome → "Remove from Chrome." This uninstalls the extension and removes all locally stored data (cached results, usage counts) from your browser. There is no account to delete because ConvertIQ has no server-side account system.
         </div>
       </div>
 
